@@ -21,7 +21,7 @@ from M2Crypto import ASN1, EC, EVP, RSA, X509, m2, util
 from tests.test_ec_curves import tested_curve
 
 
-t = time.time() + time.timezone
+t = int(time.time() + time.timezone)
 before = ASN1.ASN1_UTCTIME()
 before.set_time(t)
 after = ASN1.ASN1_UTCTIME()
@@ -71,9 +71,8 @@ def req(name):
 def save_text_pem_key(cert, name, with_key=True):
     with open(name + '.pem', 'wb') as f:
         for line in cert.as_text():
-            f.write(line)
-        for line in cert.as_pem():
-            f.write(line)
+            f.write(line.encode("ascii"))
+        f.write(cert.as_pem())
         if with_key:
             with open(name + '_key.pem', 'rb') as key_f:
                 for line in key_f:
