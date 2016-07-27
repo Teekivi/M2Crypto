@@ -9,7 +9,6 @@ try:
 except ImportError:
     import unittest
 
-import M2Crypto
 from M2Crypto.BIO import MemoryBuffer
 
 class MemoryBufferTestCase(unittest.TestCase):
